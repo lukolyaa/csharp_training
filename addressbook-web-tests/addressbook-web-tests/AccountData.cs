@@ -21,11 +21,11 @@ namespace addressbook_web_tests
         {
             get
             {
-                return Username;
+                return username;
             }
             set
             {
-                Username = value;
+                username = value;
             }
         }
         public string Password
