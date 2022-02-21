@@ -13,15 +13,20 @@ namespace addressbook_web_tests
         [Test]
         public void ContactCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitContactCreation();
             ContactData contact = new ContactData("Evgenii");
             contact.Lastname = "Petrosyan";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            Logout();
+
+            app.Contacts.CreateContact(contact);
+            app.Navigator.Logout();
+        }
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData contact = new ContactData("");
+            contact.Lastname = "";
+
+            app.Contacts.CreateContact(contact);
+            app.Navigator.Logout();
         }
     }
 }
