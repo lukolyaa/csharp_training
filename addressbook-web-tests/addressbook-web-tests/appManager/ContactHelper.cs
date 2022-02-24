@@ -57,7 +57,7 @@ namespace addressbook_web_tests
 
         public ContactHelper SelectContact(int p)
         {
-            driver.FindElement(By.Id($"{p}")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + p + "]/td/input")).Click();
             return this;
         }
 
