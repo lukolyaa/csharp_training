@@ -19,6 +19,12 @@ namespace addressbook_web_tests
         }
         public void OpenGroupsPage()
         {
+            if (driver.Url == baseURL + "/adressbook/group.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
+
             driver.FindElement(By.LinkText("groups")).Click();
         }
         public void OpenHomePage()
@@ -28,10 +34,6 @@ namespace addressbook_web_tests
         public void ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
-        }
-        public void Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
         }
     }
 }

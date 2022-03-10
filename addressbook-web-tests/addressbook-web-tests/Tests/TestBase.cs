@@ -8,18 +8,9 @@ namespace addressbook_web_tests
         protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest() //метод для инициализации
+        public void SetupApplicationManager() //метод для инициализации
         {
-            app = new ApplicationManager();
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
+            app = ApplicationManager.GetInstance();
         }
-        [TearDown]
-        public void TeardownTest()
-        {
-            app.Stop();
-        }
-
     }
-
 }
