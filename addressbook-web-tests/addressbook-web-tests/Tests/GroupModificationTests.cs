@@ -13,6 +13,8 @@ namespace addressbook_web_tests
         [Test]
         public void GroupModificationTest()
         {
+            app.Groups.GroupExistenceCheck(); 
+
             GroupData NewData = new GroupData("samolet");
             NewData.Header = "vertolet";
             NewData.Footer = "paraplan";

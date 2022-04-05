@@ -29,7 +29,6 @@ namespace addressbook_web_tests
 
         public GroupHelper Modify(int v, GroupData newData)
         {
-            manager.Navigator.OpenGroupsPage();
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -40,10 +39,19 @@ namespace addressbook_web_tests
 
         public GroupHelper Remove(int v)
         {
-            manager.Navigator.OpenGroupsPage();
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupPage();
+            return this;
+        }
+        public GroupHelper GroupExistenceCheck()
+        {
+            manager.Navigator.OpenGroupsPage();
+            if (IsElementPresent(By.ClassName("group")) == false)
+            {
+                GroupData group = new GroupData("");
+                Create(group);
+            }
             return this;
         }
         public GroupHelper SelectGroup(int index)

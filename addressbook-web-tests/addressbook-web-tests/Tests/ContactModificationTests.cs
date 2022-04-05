@@ -12,6 +12,8 @@ namespace addressbook_web_tests
         [Test]
         public void ContactModificationTest()
         {
+            app.Contacts.ContactExistenceCheck();
+
             ContactData NewData = new ContactData("Elena");
             NewData.Middlename = "Grigorievna";
             NewData.Lastname = "Stepanenko";

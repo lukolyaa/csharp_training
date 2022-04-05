@@ -12,6 +12,7 @@ namespace addressbook_web_tests.Tests
         [Test]
         public void ContactRemovalTest()
         {
+            app.Contacts.ContactExistenceCheck();
             app.Contacts.Remove(3);
         }
     }

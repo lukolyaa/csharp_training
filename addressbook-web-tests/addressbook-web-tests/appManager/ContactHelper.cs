@@ -28,7 +28,6 @@ namespace addressbook_web_tests
 
         public ContactHelper Modify(int v, int p, ContactData newData)
         {
-            ContactExistenceCheck();
             InitContactModification(v, p);
             FillContactForm(newData);
             SubmitContactModification();
@@ -38,7 +37,7 @@ namespace addressbook_web_tests
 
         public ContactHelper Remove(int v)
         {
-            ContactExistenceCheck();
+
             SelectContact(v);
             RemoveContact();
             SubmitContactRemoval();
