@@ -14,8 +14,7 @@ namespace addressbook_web_tests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("Evgenii");
-            contact.Lastname = "Petrosyan";
+            ContactData contact = new ContactData("Evgenii", "Petrosyan");
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
@@ -30,12 +29,13 @@ namespace addressbook_web_tests
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData("");
-            contact.Lastname = "";
+            ContactData contact = new ContactData("", "");
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.CreateContact(contact);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.Add(contact);

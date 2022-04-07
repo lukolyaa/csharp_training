@@ -43,28 +43,36 @@ namespace addressbook_web_tests
             SubmitContactRemoval();
             return this;
         }
+        private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name=entry]"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                string firstname = element.FindElement(By.XPath(".//td[3]")).Text;
-                string lastname = element.FindElement(By.XPath(".//td[2]")).Text;
+                contactCache = new List<ContactData>();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name=entry]"));
+                foreach (IWebElement element in elements)
+                {
+                    string firstname = element.FindElement(By.XPath(".//td[3]")).Text;
+                    string lastname = element.FindElement(By.XPath(".//td[2]")).Text;
 
-                ContactData contact = new ContactData(firstname);
-                contact.Lastname = lastname;
-
-                contacts.Add(contact);
+                    contactCache.Add(new ContactData(firstname, lastname)
+                    {
+                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                    });
+                }
             }
-            return contacts;
+            return new List<ContactData>(contactCache);
+        }
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("[name=entry]")).Count;
         }
 
         public ContactHelper ContactExistenceCheck()
         {
             if (IsElementPresent(By.Name("selected[]")))
             {
-                ContactData contact = new ContactData("Evgeniy");
+                ContactData contact = new ContactData("Evgeniy", "Petrosyan");
                 CreateContact(contact);          
             }
             return this;
@@ -73,6 +81,7 @@ namespace addressbook_web_tests
         public ContactHelper SubmitContactRemoval()
         {
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;
             return this;
         }
 
@@ -103,11 +112,13 @@ namespace addressbook_web_tests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 

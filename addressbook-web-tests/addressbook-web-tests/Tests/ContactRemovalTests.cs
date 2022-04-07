@@ -16,12 +16,20 @@ namespace addressbook_web_tests.Tests
             app.Contacts.ContactExistenceCheck();
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData toBeRemoved = oldContacts[num];
 
             app.Contacts.Remove(num);
+
+            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.RemoveAt(num);
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
         }
     }
 }
