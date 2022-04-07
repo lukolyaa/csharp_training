@@ -13,13 +13,21 @@ namespace addressbook_web_tests
         [Test]
         public void GroupModificationTest()
         {
-            app.Groups.GroupExistenceCheck(); 
+            app.Groups.GroupExistenceCheck();
 
             GroupData NewData = new GroupData("samolet");
             NewData.Header = "vertolet";
             NewData.Footer = "paraplan";
 
-            app.Groups.Modify(1, NewData);
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Modify(0, NewData);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = NewData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

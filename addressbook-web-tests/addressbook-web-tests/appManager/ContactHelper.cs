@@ -43,10 +43,26 @@ namespace addressbook_web_tests
             SubmitContactRemoval();
             return this;
         }
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name=entry]"));
+            foreach (IWebElement element in elements)
+            {
+                string firstname = element.FindElement(By.XPath(".//td[3]")).Text;
+                string lastname = element.FindElement(By.XPath(".//td[2]")).Text;
+
+                ContactData contact = new ContactData(firstname);
+                contact.Lastname = lastname;
+
+                contacts.Add(contact);
+            }
+            return contacts;
+        }
 
         public ContactHelper ContactExistenceCheck()
         {
-            if (IsElementPresent(By.Id("3")) == false)
+            if (IsElementPresent(By.Name("selected[]")))
             {
                 ContactData contact = new ContactData("Evgeniy");
                 CreateContact(contact);          

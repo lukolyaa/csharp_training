@@ -44,6 +44,18 @@ namespace addressbook_web_tests
             ReturnToGroupPage();
             return this;
         }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.OpenGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
         public GroupHelper GroupExistenceCheck()
         {
             manager.Navigator.OpenGroupsPage();
@@ -56,7 +68,7 @@ namespace addressbook_web_tests
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index+1) + "]/input")).Click();
             return this;
         }
         public GroupHelper RemoveGroup()
