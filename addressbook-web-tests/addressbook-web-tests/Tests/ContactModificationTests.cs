@@ -21,7 +21,7 @@ namespace addressbook_web_tests
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             ContactData oldData = oldContacts[num];
 
-            app.Contacts.Modify(num, 8, NewData);
+            app.Contacts.Modify(num, 7, NewData);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
