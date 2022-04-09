@@ -187,5 +187,21 @@ namespace addressbook_web_tests
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
         }
+
+        public ContactData GetContactInformationFromDetailsForm(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            InitContactModification(index, 6);
+
+            string allData = driver.FindElement(By.Id("content")).Text;
+
+
+            ContactData contact = new ContactData("", "")
+            {
+                AllData = allData
+            };
+
+            return contact;
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace addressbook_web_tests
     {
         private string allPhones;
         private string allEmails;
+        private string allData;
+        private string allNames;
 
         public ContactData(string firstname, string lastname)
         {
@@ -73,6 +75,38 @@ namespace addressbook_web_tests
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
+
+        public string AllNames
+        {
+            get
+            {
+                if (allNames != null)
+                {
+                    return allNames;
+                }
+                else if (Firstname != null && Firstname != "" 
+                    && Lastname != null && Lastname != "")
+                {
+                    return "";
+                }
+                else if (Firstname != null && Firstname != "")
+                {
+                    return Lastname;
+                }
+                else if (Lastname != null && Lastname != "")
+                {
+                    return Firstname;
+                }
+                else
+                {
+                    return Firstname + " " + Lastname;
+                }
+            }
+            set
+            {
+                allNames = value;
+            }
+        }
         public string AllEmails
         {
             get
@@ -110,6 +144,24 @@ namespace addressbook_web_tests
             }
         }
 
+        public string AllData
+        {
+            get
+            {
+                if (allData != null)
+                {
+                    return allData;
+                }
+                else
+                {
+                    return (Person() + PhoneNumbers() + Emails()).Trim();
+                }
+            }
+            set
+            {
+                allData = value;
+            }
+        }
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
@@ -117,6 +169,70 @@ namespace addressbook_web_tests
                 return "";
             }
             return Regex.Replace(phone,"[ -()]", "") + "\r\n";
+        }
+        private string Person()
+        {
+            string result = "";
+
+            if (AllNames != null
+                && AllNames != "")
+            {
+                result += AllNames + "\r\n";
+            }
+
+            if (Address != null
+                 && Address != "")
+            {
+                result += Address + "\r\n";
+            }
+
+            return result;
+        }
+        private string PhoneNumbers()
+        {
+            string result = "\r\n";
+
+            if (HomePhone != null
+                && HomePhone != "")
+            {
+                result += "H: " + HomePhone + "\r\n";
+            }
+
+            if (MobilePhone != null
+                && MobilePhone != "")
+            {
+                result += "M: " + MobilePhone + "\r\n";
+            }
+
+            if (WorkPhone != null
+                && WorkPhone != "")
+            {
+                result += "W: " + WorkPhone + "\r\n";
+            }
+            return result;
+        }
+        private string Emails()
+        {
+            string result = "";
+
+            if (Email1 != null
+                && Email1 != "")
+            {
+                result += Email1 + "\r\n";
+            }
+
+            if (Email2 != null
+                 && Email2 != "")
+            {
+                result += Email2 + "\r\n";
+            }
+
+            if (Email3 != null
+                && Email3 != "")
+            {
+                result += Email3 + "\r\n";
+            }
+            return result;
         }
     }
 }
