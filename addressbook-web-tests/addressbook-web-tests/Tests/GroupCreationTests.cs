@@ -3,6 +3,9 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -26,10 +29,10 @@ namespace addressbook_web_tests
 
             return groups;
         }
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            string[] lines = File.ReadAllLines(@"group.csv");
+            string[] lines = File.ReadAllLines(@"groups.csv");
             foreach (string I in lines)
             {
                 string[] parts = I.Split(',');
@@ -43,7 +46,19 @@ namespace addressbook_web_tests
             return groups;
         }
 
-        [Test, TestCaseSource("GroupDataFromFile")]
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            return (List<GroupData>)
+                new XmlSerializer(typeof(List<GroupData>))
+                    .Deserialize(new StreamReader(@"groups.xml"));
+        }
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"groups.json"));
+        }
+
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();

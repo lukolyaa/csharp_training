@@ -14,6 +14,10 @@ namespace addressbook_web_tests
         private string allData;
         private string allNames;
 
+        public ContactData()
+        {
+        }
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
