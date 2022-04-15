@@ -74,6 +74,9 @@ namespace addressbook_web_tests
 
         public string Middlename { get; set; }
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
         public string Address { get; set; }
 
         public string HomePhone { get; set; }
@@ -245,6 +248,13 @@ namespace addressbook_web_tests
                 result += Email3 + "\r\n";
             }
             return result;
+        }
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
         }
     }
 }

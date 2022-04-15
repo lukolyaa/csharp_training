@@ -8,19 +8,24 @@ using NUnit.Framework;
 
 namespace addressbook_web_tests
 {
-    [Test]
-    public void TestAddingContactToGroup()
+    [TestFixture]
+    public class AddingContactToGroupTests : AuthTestBase
     {
-        var group = GroupData.GetAll()[0];
-        var oldList = group.GetContacts();
-        var contact = ContactData.GetAll().Except(oldList).First();
+        [Test]
+        public void TestAddingContactToGroup()
+        {
+            var group = GroupData.GetAll()[0];
+            var oldList = group.GetContacts();
+            var contact = ContactData.GetAll().Except(oldList).First();
 
-        Application.Contacts.AddContactToGroup(contact, group);
+            app.Contacts.AddContactToGroup(contact, group);
 
-        var newList = group.GetContacts();
-        oldList.Add(contact);
-        oldList.Sort();
-        newList.Sort();
+            var newList = group.GetContacts();
+            oldList.Add(contact);
+            oldList.Sort();
+            newList.Sort();
 
-        Assert.AreEqual(oldList, newList);
+            Assert.AreEqual(oldList, newList);
+        }
     }
+}

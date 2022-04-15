@@ -18,14 +18,14 @@ namespace addressbook_web_tests
             ContactData NewData = new ContactData("Elena", "Stepanenko");
             NewData.Middlename = "Grigorievna";
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[num];
 
-            app.Contacts.Modify(num, 7, NewData);
+            app.Contacts.Modify(oldData, NewData);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts[num].Firstname = NewData.Firstname;
             oldContacts[num].Lastname = NewData.Lastname;
             oldContacts.Sort();
