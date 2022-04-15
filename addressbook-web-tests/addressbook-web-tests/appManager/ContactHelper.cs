@@ -27,6 +27,11 @@ namespace addressbook_web_tests
             return this;
         }
 
+        internal void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            throw new NotImplementedException();
+        }
+
         public ContactHelper Modify(int v, int p, ContactData newData)
         {
             InitContactModification(v, p);

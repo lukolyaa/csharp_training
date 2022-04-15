@@ -59,7 +59,7 @@ namespace addressbook_web_tests
                 File.ReadAllText(@"groups.json"));
         }
 
-        [Test, TestCaseSource("GroupDataFromXmlFile")]
+        [Test]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
@@ -98,15 +98,10 @@ namespace addressbook_web_tests
         [Test]
         public void TestDBConnectivity()
         {
-            DateTime start = DateTime.Now;
-            List<GroupData> fromUi = app.Groups.GetGroupList();
-            DateTime end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
-
-            start = DateTime.Now;
-            List<GroupData> fromDb = GroupData.GetAll();
-            end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                Console.Out.WriteLine(contact);
+            }
         }
     }
 }

@@ -117,6 +117,7 @@
     <Compile Include="model\AddressBookDB.cs" />
     <Compile Include="model\ContactData.cs" />
     <Compile Include="appManager\ContactHelper.cs" />
+    <Compile Include="model\GroupContactRelation.cs" />
     <Compile Include="model\GroupData.cs" />
     <Compile Include="appManager\GroupHelper.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
