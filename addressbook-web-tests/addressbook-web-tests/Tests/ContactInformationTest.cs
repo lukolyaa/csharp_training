@@ -33,7 +33,7 @@ namespace addressbook_web_tests.Tests
             ContactData fromEdit = app.Contacts.GetContactInformationFromEditForm(0);
             ContactData fromDetails = app.Contacts.GetContactInformationFromDetailsForm(0);
 
-            Assert.AreEqual(fromEdit, fromDetails);
+            Assert.AreEqual(fromEdit.AllData, fromDetails.AllData);
         }
 
     }

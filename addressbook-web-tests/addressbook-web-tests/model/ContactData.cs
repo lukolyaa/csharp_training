@@ -48,11 +48,14 @@ namespace addressbook_web_tests
             {
                 return 1;
             }
-            if (Object.ReferenceEquals(this, other))
+            if (Lastname.CompareTo(other.Lastname) != 0)
             {
-                return 0;
+                return Lastname.CompareTo(other.Lastname);
             }
-            return Firstname.CompareTo(other.Firstname);
+            else
+            {
+                return Firstname.CompareTo(other.Firstname);
+            }
         }
         public string Firstname { get; set; }
 
