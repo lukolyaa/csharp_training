@@ -228,7 +228,7 @@ namespace addressbook_web_tests
         }
         private string Emails()
         {
-            string result = "";
+            string result = "\r\n";
 
             if (Email1 != null
                 && Email1 != "")
