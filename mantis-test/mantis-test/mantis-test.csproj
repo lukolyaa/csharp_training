@@ -82,10 +82,16 @@
     <Compile Include="appmanager\JamesHelper.cs" />
     <Compile Include="appmanager\LoginHelper.cs" />
     <Compile Include="appmanager\MailHelper.cs" />
+    <Compile Include="appmanager\MenuManagementHelper.cs" />
+    <Compile Include="appmanager\ProjectManagementHelper.cs" />
     <Compile Include="appmanager\RegistrationHelper.cs" />
     <Compile Include="appmanager\TelnetInterface.cs" />
     <Compile Include="model\AccountData.cs" />
+    <Compile Include="model\ProjectData.cs" />
     <Compile Include="tests\AccountCreationTest.cs" />
+    <Compile Include="tests\AuthTestBase.cs" />
+    <Compile Include="tests\ProjectCreationTest.cs" />
+    <Compile Include="tests\ProjectRemoveTest.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\UnitTest1.cs" />
