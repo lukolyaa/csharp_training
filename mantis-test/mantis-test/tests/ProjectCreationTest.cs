@@ -10,23 +10,17 @@ namespace mantis_tests
 {
     public class ProjectCreationTests : AuthTestBase
     {
-        public static IEnumerable<ProjectData> RandomProjectDataProvider()
+        [Test]
+
+        public void ProjectCreationTest()
         {
-            List<ProjectData> contacts = new List<ProjectData>();
-            for (int i = 0; i < 1; i++)
+            ProjectData project = new ProjectData("project");
+            AccountData account = new AccountData()
             {
-                contacts.Add(new ProjectData(GenerateRandomString(15))
-                {
-                    Description = GenerateRandomString(30)
-                });
-            }
+                Name = "administrator",
+                Password = "root"
+            };
 
-            return contacts;
-        }
-        [Test, TestCaseSource("RandomProjectDataProvider")]
-
-        public void ProjectCreationTest(ProjectData project)
-        {
             List<ProjectData> oldProjects = app.projectManagementHelper.GetProjectList();
             app.projectManagementHelper.Create(project);
 

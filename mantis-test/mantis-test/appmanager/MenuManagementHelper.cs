@@ -17,15 +17,15 @@ namespace mantis_tests
         }
         public void OpenViewPage()
         {
-            if (driver.Url == baseURL + "/mantisbt-2.22.1/my_view_page.php")
+            if (driver.Url == baseURL + "/mantisbt-2.25.3/my_view_page.php")
             {
                 return;
             }
-            driver.Navigate().GoToUrl(baseURL + "/mantisbt-2.22.1/my_view_page.php");
+            driver.Navigate().GoToUrl(baseURL + "/mantisbt-2.25.3/my_view_page.php");
         }
         public void OpenManageOverviewPage()
         {
-            if (driver.Url == baseURL + "mantisbt-2.22.1/manage_overview_page.php"
+            if (driver.Url == baseURL + "mantisbt-2.25.3/manage_overview_page.php"
                 && IsElementPresent(By.XPath("//th[@class='category' and contains(text(), 'Версия MantisBT')]")))
             {
                 return;
@@ -34,7 +34,7 @@ namespace mantis_tests
         }
         public void OpenManageProjectPage()
         {
-            if (driver.Url == baseURL + "mantisbt-2.22.1/manage_proj_page.php"
+            if (driver.Url == baseURL + "mantisbt-2.25.3/manage_proj_page.php"
                 && IsElementPresent(By.XPath("//button[@type='submit' and contains(text(), 'Создать новый проект')]")))
             {
                 return;

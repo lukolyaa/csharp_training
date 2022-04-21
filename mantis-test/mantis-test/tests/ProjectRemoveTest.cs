@@ -13,15 +13,29 @@ namespace mantis_tests
         [Test]
         public void ProjectRemoveTest()
         {
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
+
+            if (app.Api.GetProjects(account).Count == 0)
+            {
+                ProjectData project = new ProjectData("project");
+                app.Api.AddProject(account, project);
+            }
+            int num = 0;
+
             app.projectManagementHelper.CheckProjects();
             List<ProjectData> oldProjects = app.projectManagementHelper.GetProjectList();
-            app.projectManagementHelper.Remove(0);
+            ProjectData toBeRemoved = oldProjects[num];
+            app.projectManagementHelper.Remove(toBeRemoved);
 
 
             Assert.AreEqual(oldProjects.Count - 1, app.projectManagementHelper.GetProjectCount());
             List<ProjectData> newProjects = app.projectManagementHelper.GetProjectList();
 
-            oldProjects.RemoveAt(0);
+            oldProjects.RemoveAt(num);
             oldProjects.Sort();
             newProjects.Sort();
 

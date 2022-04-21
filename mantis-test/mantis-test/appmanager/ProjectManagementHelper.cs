@@ -10,11 +10,11 @@ namespace mantis_tests
     public class ProjectManagementHelper : HelperBase
     {
         public ProjectManagementHelper(ApplicationManager manager) : base(manager) { }
-        public void Remove(int v)
+        public void Remove(ProjectData project)
         {
             manager.menuManagamentHelper.OpenManageOverviewPage();
             manager.menuManagamentHelper.OpenManageProjectPage();
-            SelectProject(0);
+            SelectProject(project);
             RemoveProject();
             AssertRemovalProject();
         }
@@ -29,7 +29,7 @@ namespace mantis_tests
 
         public void AssertRemovalProject()
         {
-            driver.FindElement(By.XPath("//input[@value='Удалить проект']")).Click();
+            driver.FindElement(By.XPath("//input[@type='submit']")).Click();
         }
 
         internal int GetProjectCount()
@@ -42,18 +42,18 @@ namespace mantis_tests
 
         public void RemoveProject()
         {
-            driver.FindElement(By.XPath("//input[@value='Удалить проект']")).Click();
+            IWebElement deleteForm = driver.FindElement(By.Id("project-delete-form"));
+            deleteForm.FindElement(By.ClassName("btn")).Click();
         }
 
-        public void SelectProject(int index)
+        public void SelectProject(ProjectData toBeRemoved)
         {
-            IWebElement cell = driver.FindElements(By.CssSelector("div.table-responsive"))[0].FindElement(By.TagName("tbody"));
-            cell.FindElements(By.TagName("tr"))[index].FindElements(By.TagName("td"))[0].FindElement(By.TagName("a")).Click();
+            driver.FindElement(By.XPath("(//a[text()='" + toBeRemoved.Name + "'])[2]")).Click();
         }
 
         public void SubmitProjectCreation()
         {
-            driver.FindElement(By.XPath("//input[@value='Добавить проект']")).Click();
+            driver.FindElement(By.XPath("//input[@type='submit']")).Click();
         }
 
         public void InitNewProjectCreation()
