@@ -16,7 +16,7 @@ namespace mantis_tests
             Mantis.IssueData issue = new Mantis.IssueData();
             issue.summary = issueData.Summary;
             issue.description = issueData.Description;
-            issue.category = issueData.Catebgory;
+            issue.category = issueData.Category;
             issue.project = new Mantis.OjectRef();
             issue.project.id = projectData.Id;
             client.mc_issue_add(account.Name, account.Password, issue);
