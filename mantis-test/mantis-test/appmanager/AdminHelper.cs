@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using SimpleBrowser.WebDriver;
 using System.Text.RegularExpressions;
 
@@ -47,7 +48,7 @@ namespace mantis_tests
 
         public IWebDriver OpenAppAndLogin()
         {
-            IWebDriver driver = new SimpleBrowserDriver();
+            IWebDriver driver = new FirefoxDriver();
             driver.Url = baseURL + "/login_page.php";
             driver.FindElement(By.Id("username")).SendKeys("administrator");
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();

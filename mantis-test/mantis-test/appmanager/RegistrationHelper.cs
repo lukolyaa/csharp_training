@@ -63,7 +63,7 @@ namespace mantis_tests
 
         public void OpenMainPage()
         {
-            driver.Url = "http://localhost/mantisbt/login_page.php";
+            driver.Url = "http://localhost/mantisbt-2.25.3/login_page.php";
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mantis = mantis_test.Mantis;
 
 namespace mantis_tests
 {
@@ -17,7 +18,7 @@ namespace mantis_tests
             issue.summary = issueData.Summary;
             issue.description = issueData.Description;
             issue.category = issueData.Category;
-            issue.project = new Mantis.OjectRef();
+            issue.project = new Mantis.ObjectRef();
             issue.project.id = projectData.Id;
             client.mc_issue_add(account.Name, account.Password, issue);
         }

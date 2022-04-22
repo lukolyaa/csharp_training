@@ -25,7 +25,7 @@ namespace mantis_tests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/";
+            baseURL = "http://localhost/mantisbt-2.25.3";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
@@ -57,7 +57,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.25.2/login_page.php";
+                newInstance.driver.Url = "http://localhost/mantisbt-2.25.3/login_page.php";
                 app.Value = newInstance;
             }
             return app.Value;

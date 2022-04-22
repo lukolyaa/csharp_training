@@ -12,16 +12,14 @@ namespace mantis_tests
         public ProjectManagementHelper(ApplicationManager manager) : base(manager) { }
         public void Remove(ProjectData project)
         {
-            manager.menuManagamentHelper.OpenManageOverviewPage();
-            manager.menuManagamentHelper.OpenManageProjectPage();
+            manager.menuManagamentHelper.OpenViewPage();
             SelectProject(project);
             RemoveProject();
             AssertRemovalProject();
         }
         public void Create(ProjectData project)
         {
-            manager.menuManagamentHelper.OpenManageOverviewPage();
-            manager.menuManagamentHelper.OpenManageProjectPage();
+            manager.menuManagamentHelper.OpenViewPage();
             InitNewProjectCreation();
             FillProjectForm(project);
             SubmitProjectCreation();
@@ -34,8 +32,7 @@ namespace mantis_tests
 
         internal int GetProjectCount()
         {
-            manager.menuManagamentHelper.OpenManageOverviewPage();
-            manager.menuManagamentHelper.OpenManageProjectPage();
+            manager.menuManagamentHelper.OpenViewPage();
             IWebElement cell = driver.FindElements(By.CssSelector("div.table-responsive"))[0].FindElement(By.TagName("tbody"));
             return cell.FindElements(By.TagName("tr")).Count();
         }
@@ -58,7 +55,7 @@ namespace mantis_tests
 
         public void InitNewProjectCreation()
         {
-            driver.FindElement(By.XPath("//button[@type='submit' and contains(text(), 'Создать новый проект')]")).Click();
+            driver.FindElement(By.XPath("//div/div/div[2]/div[2]//button")).Click();
         }
 
         public void FillProjectForm(ProjectData project)
@@ -69,8 +66,7 @@ namespace mantis_tests
 
         public void CheckProjects()
         {
-            manager.menuManagamentHelper.OpenManageOverviewPage();
-            manager.menuManagamentHelper.OpenManageProjectPage();
+            manager.menuManagamentHelper.OpenViewPage();
             IWebElement cell = driver.FindElements(By.CssSelector("div.table-responsive"))[0].FindElement(By.TagName("tbody"));
             int count = cell.FindElements(By.TagName("tr")).Count();
             if (count == 0)
@@ -85,8 +81,7 @@ namespace mantis_tests
         public List<ProjectData> GetProjectList()
         {
             List<ProjectData> projects = new List<ProjectData>();
-            manager.menuManagamentHelper.OpenManageOverviewPage();
-            manager.menuManagamentHelper.OpenManageProjectPage();
+            manager.menuManagamentHelper.OpenViewPage();
 
             IWebElement cell = driver.FindElements(By.CssSelector("div.table-responsive"))[0].FindElement(By.TagName("tbody"));
             ICollection<IWebElement> elements = cell.FindElements(By.TagName("tr"));
