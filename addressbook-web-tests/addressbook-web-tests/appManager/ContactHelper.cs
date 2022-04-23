@@ -20,6 +20,7 @@ namespace addressbook_web_tests
 
         public ContactHelper CreateContact(ContactData contact)
         {
+            manager.Navigator.OpenHomePage();
             InitContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
