@@ -258,6 +258,40 @@ namespace addressbook_web_tests
 
             return contact;
         }
+
+        public string ConvertContactInformationFromEditFormToString(ContactData contact)
+        {
+            string firstName = CheckNotNull("", contact.Firstname, " ");
+            string lastName = contact.Lastname;
+            string nameFragment = (firstName + lastName).Trim();
+            nameFragment = CheckNotNull("", nameFragment, "\r\n");
+
+            string address = CheckNotNull("", contact.Address, "\r\n");
+
+            string homePhone = CheckNotNull("\r\n" + "H: ", contact.HomePhone, "\r\n");
+            string mobilePhone = CheckNotNull("M: ", contact.MobilePhone, "\r\n");
+            string workPhone = CheckNotNull("W: ", contact.WorkPhone, "\r\n");
+            string phonesFragment = (homePhone + mobilePhone + workPhone).Trim();
+            phonesFragment = CheckNotNull("\r\n", phonesFragment, "\r\n");
+
+            string email = CheckNotNull("", contact.Email1, "\r\n");
+            string email2 = CheckNotNull("", contact.Email2, "\r\n");
+            string email3 = CheckNotNull("", contact.Email3, "\r\n");
+            string emailsFragment = (email + email2 + email3).Trim();
+            emailsFragment = CheckNotNull("\r\n", emailsFragment, "\r\n");
+
+            return (nameFragment + address + phonesFragment + emailsFragment).Trim();
+        }
+
+        public static string CheckNotNull(string text_in, string text, string text_out)
+        {
+            if (text.Equals("") || text.Equals(null))
+            {
+                return "";
+            }
+            return text_in + text + text_out;
+        }
+
         public int GetNumberOfSearchResults()
         {
             manager.Navigator.OpenHomePage();
@@ -266,20 +300,13 @@ namespace addressbook_web_tests
             return Int32.Parse(m.Value);
         }
 
-        public ContactData GetContactInformationFromDetailsForm(int index)
+        public string GetContactInformationFromDetailsForm(int index)
         {
             manager.Navigator.OpenHomePage();
             InitContactModification(index, 6);
 
             string allData = driver.FindElement(By.Id("content")).Text;
-
-
-            ContactData contact = new ContactData("", "")
-            {
-                AllData = allData
-            };
-
-            return contact;
+            return allData;
         }
     }
 }

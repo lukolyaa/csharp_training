@@ -30,10 +30,11 @@ namespace addressbook_web_tests.Tests
         [Test]
         public void TestContactDetailsAndEditForm()
         {
-            ContactData fromEdit = app.Contacts.GetContactInformationFromEditForm(0);
-            ContactData fromDetails = app.Contacts.GetContactInformationFromDetailsForm(0);
+            ContactData contact = app.Contacts.GetContactInformationFromEditForm(5);
+            string fromEdit = app.Contacts.ConvertContactInformationFromEditFormToString(contact);
+            string fromDetails = app.Contacts.GetContactInformationFromDetailsForm(5);
 
-            Assert.AreEqual(fromEdit.AllData, fromDetails.AllData);
+            Assert.AreEqual(fromEdit, fromDetails);
         }
 
     }

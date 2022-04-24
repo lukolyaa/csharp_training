@@ -177,6 +177,7 @@ namespace addressbook_web_tests
                 allData = value;
             }
         }
+    
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
@@ -205,7 +206,7 @@ namespace addressbook_web_tests
         }
         private string PhoneNumbers()
         {
-            string result = "\r\n";
+            string result = "";
 
             if (HomePhone != null
                 && HomePhone != "")
@@ -228,7 +229,7 @@ namespace addressbook_web_tests
         }
         private string Emails()
         {
-            string result = "\r\n";
+            string result = "";
 
             if (Email1 != null
                 && Email1 != "")
